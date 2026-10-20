@@ -1,0 +1,47 @@
+Davi Vitor Gualberto Diaz RM:569825
+Prompts utilizados
+
+--------------------------------------------------------------------
+system-prompt/developer-persona
+
+Atue como um dev front-end e faça um portfolio pessoal para uma atividade academica de vibe code. Use cores frias (Preto Profundo (Deep Black): #0A0A0A, Branco Puro (Pure White): #FFFFFF, Cinza Editorial (Editorial Gray): #E5E5E5 e Cinza Chumbo (Charcoal Gray): #333333) e use um estilo Design Editorial / Suíço (Swiss Style), Brutalismo Minimalista e elementos de Surrealismo Editorial, siga de referencia a primeira imagem enviada.
+ Siga como referencia a segunda imagem enviada.
+Faça o portfolio com as informações que estarei mandando. use uma foto minha que estou mandando, transforme em png e coloque no centro enquanto o meu nome e sobrenome passem como animação. Use a fonte  “Bodoni Moda” para o overlay artistico, coloque personalidade e um tom mais elegante e moderno. 
+ 
+Faça uma NavBar e use de referencia a terceira imagem enviada
+Assim que clicar em outro topico, faça uma animação para que mostre que esteja selecionado assim que fizer a transição.  
+Use o meu curriculo para a realização do portfolio com as seguintes informações descrita na quarta imagem enviada.
+
+---------------------------------------------------------------------------
+
+Use essa imagem em png para colocar no projeto. Posicione o png da melhor forma possivel para ficar fluido o portfolio.
+
+----------------------------------------------------------------------------------
+
+Use esse PNG para deixar fixo no portfolio. Deixe o portfolio mais suave, as fontes e cores estão perfeitas, porem ficou muito poluido o filtro negativo e a sobreposição de cor quando passa algo preto e branco. Deixe a sobreposição apenas atras da minha foto (PNG) para nao ficar poluido demais. Tambem ajustando o portfolio, nao faça ele diretamente igual ao curriculo, o curriculo serve apenas para adquirir as informações. Tire todas as coisas desnecessarias (ex: (manifesto)) para melhor fluidez do portfolio
+
+---------------------------------------------------------------------------------------
+
+ficou muito bom, mas ainda quero aquelas animações que tinha na seção anterior,  a poluição era apenas na parte introdutória do portfolio.
+
+----------------------------------------------------------------------------------------
+
+no codigo, ficou um texto grande demais quando se trata a colocar a foto png. Corrija isso
+
+----------------------------------------------------------------------------------------
+
+https://www.skills.sh/anthropics/skills/frontend-design instale essa skill
+
+---------------------------------------------------------------------------------------
+
+agora quero que mude a area de contato fazendo-a virar uma "call to action (CTA)". Espalhe pela pagina inteira areas como "vamos conversar" assim que clicar ja aparecer um formulario para que preencha com as informações do usuário como: Nome, E-mail, empresa e caixa de mensagem para saber do que se trata. Tambem coloque o meu linkedln na area de contato que é esse: [www.linkedin.com/in/davivitordev](https://www.linkedin.com/in/davivitordev)
+
+Use como referencia as imagens que estou enviando e faça de acordo com o portfolio e em seguida, ja revise tudo com base da skill que enviei no ultimo prompt.
+
+----------------------------------------------------------------------------------------
+
+consulte esse site https://academiadeacessibilidade.com.br/ferramentas/checklist-abnt/index.html e faça novamente mais uma revisão
+
+----------------------------------------------------------------------------------------
+
+com essas alterações, deixe o modelo como estava no penultimo prompt (quando revisou). deixe o botao de pausar animações menor e fazer com que o topico "engenharia de software infra de ti tecnologia que..." fique sempre abaixo do meu nome que esta passando. na area de contatos faça 2 colunas, a coluna que mostra a vamos conversar e a coluna que ja aparece o formulario direto (apenas na seção de contato), tire tambem o email e telefone.  Na seção dos cursos, faça uma breve descrição bem resumida de cada curso num acordeão.
