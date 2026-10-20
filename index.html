@@ -562,7 +562,7 @@ body.form-open{overflow:hidden}
   </div>
 </section>
 </main>
-<footer class="foot"><span>© 2026 Davi Vitor Gualberto Diaz</span><span>Feito por Davi</span></span></footer>
+<footer class="foot"><span>© 2026 Davi Vitor Gualberto Diaz</span><span>Feito por Davi</span></footer>
 
 <nav class="nav" id="nav" aria-label="Navegação principal">
   <span class="indicator" id="indicator"></span>
@@ -799,7 +799,9 @@ body.form-open{overflow:hidden}
           : e.activation
             ? 'O formulário ainda está aguardando ativação do serviço de envio.'
             : 'Não foi possível falar com o serviço de envio.';
-        err.innerHTML = `A mensagem não foi enviada. ${reason} <a href="${mailto}" style="border-bottom:1px solid">Enviar pelo seu app de e-mail</a> com tudo já preenchido.`;
+        console.warn('[formulário] resposta do serviço de envio:', e.name, e.message);
+        const detail = e.name === 'AbortError' ? '' : `<br><small style="opacity:.7">Detalhe técnico: ${String(e.message).replace(/[<>&]/g, '')}</small>`;
+        err.innerHTML = `A mensagem não foi enviada. ${reason} <a href="${mailto}" style="border-bottom:1px solid">Enviar pelo seu app de e-mail</a> com tudo já preenchido.${detail}`;
         err.classList.add('show');
       } finally {
         clearTimeout(timer);
