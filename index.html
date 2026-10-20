@@ -562,7 +562,7 @@ body.form-open{overflow:hidden}
   </div>
 </section>
 </main>
-<footer class="foot"><span>© 2026 Davi Vitor Gualberto Diaz</span><span>Projeto feito por Davi</span></footer>
+<footer class="foot"><span>© 2026 Davi Vitor Gualberto Diaz</span><span>Feito por Davi</span></span></footer>
 
 <nav class="nav" id="nav" aria-label="Navegação principal">
   <span class="indicator" id="indicator"></span>
@@ -758,24 +758,51 @@ body.form-open{overflow:hidden}
       const bad = fields.filter(el => !check(el));
       if (bad.length){ bad[0].focus(); return; }
       const data = Object.fromEntries(new FormData(form));
+      const first = data.nome.trim().split(' ')[0];
+      const subject = `Portfólio · ${data.assunto} · ${data.nome.trim()}`;
+      const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${data.nome}\nE-mail: ${data.email}\nEmpresa: ${data.empresa || '—'}\n\n${data.mensagem}`)}`;
+      const finish = (title, text) => {
+        $('h3', done).textContent = title;
+        $('.done-text', root).textContent = text;
+        form.reset();
+        view.hidden = true; done.classList.add('show');
+        live.textContent = title;
+        $('h3', done).focus();
+      };
+
+      /* Arquivo aberto direto do computador (file://): o serviço de envio não aceita.
+         Abre o app de e-mail com a mensagem pronta. */
+      if (location.protocol === 'file:'){
+        window.location.href = mailto;
+        finish('Mensagem pronta.', `${first}, abrimos seu app de e-mail com a mensagem preenchida. É só clicar em enviar por lá.`);
+        return;
+      }
+
       btn.disabled = true; btn.firstChild.textContent = 'Enviando ';
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 12000);
       try {
         const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
           method: 'POST',
+          signal: ctrl.signal,
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ ...data, empresa: data.empresa || '—', _subject: `Portfólio · ${data.assunto} · ${data.nome}`, _replyto: data.email, _template: 'table', _captcha: 'false' })
+          body: JSON.stringify({ ...data, empresa: data.empresa || '—', _subject: subject, _replyto: data.email, _template: 'table', _captcha: 'false' })
         });
-        if (!res.ok) throw new Error();
-        $('.done-text', root).textContent = `Obrigado, ${data.nome.trim().split(' ')[0]}! Vou responder no e-mail ${data.email.trim()}.`;
-        form.reset();
-        view.hidden = true; done.classList.add('show');
-        live.textContent = 'Mensagem enviada.';
-        $('h3', done).focus();
-      } catch {
-        const body = encodeURIComponent(`Nome: ${data.nome}\nEmpresa: ${data.empresa || '—'}\n\n${data.mensagem}`);
-        err.innerHTML = `A mensagem não foi enviada: sem conexão com o serviço de envio. Tente de novo ou <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Portfólio · ' + data.assunto)}&body=${body}" style="border-bottom:1px solid">envie pelo seu e-mail</a>.`;
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || String(json.success) !== 'true'){
+          const e = new Error(json.message || 'falha'); e.activation = /activat/i.test(json.message || ''); throw e;
+        }
+        finish('Mensagem enviada.', `Obrigado, ${first}! Vou responder no e-mail ${data.email.trim()}.`);
+      } catch (e) {
+        const reason = e.name === 'AbortError'
+          ? 'O serviço de envio demorou demais para responder.'
+          : e.activation
+            ? 'O formulário ainda está aguardando ativação do serviço de envio.'
+            : 'Não foi possível falar com o serviço de envio.';
+        err.innerHTML = `A mensagem não foi enviada. ${reason} <a href="${mailto}" style="border-bottom:1px solid">Enviar pelo seu app de e-mail</a> com tudo já preenchido.`;
         err.classList.add('show');
       } finally {
+        clearTimeout(timer);
         btn.disabled = false; btn.firstChild.textContent = 'Enviar mensagem ';
       }
     });
